@@ -7,7 +7,7 @@ A self-built Security Operations Center (SOC) lab simulating real attacker behav
  
 | Component | Details |
 |---|---|
-| **Attacker / SIEM host** | Kali Linux (`192.168.127.128`) — runs attack tooling (Nmap, Hydra) and Splunk Enterprise |
+| **Attacker / SIEM host** | Kali Linux (`192.168.127.129`) — runs attack tooling (Nmap, Hydra) and Splunk Enterprise |
 | **Target** | Metasploitable2 (`192.168.127.130`) — intentionally vulnerable Linux VM |
 | **Network** | VMware Host-only subnet, isolated from external traffic |
 | **Log transport** | `sysklogd` on Metasploitable2 forwarding over UDP 514 to Splunk |
@@ -20,7 +20,7 @@ Metasploitable2 uses **`sysklogd`**, not `rsyslog` — an important distinction,
  
 ```
 # /etc/syslog.conf — forwarding rule added
-*.*     @192.168.127.128
+*.*     @192.168.127.129
 ```
  
 ![syslog.conf forwarding rule](screenshots/syslog-conf.png)
@@ -59,9 +59,9 @@ Targeted the `msfadmin` account with a small credential list, successfully recov
 **Splunk result:** Full attack sequence captured.
  
 ```
-sshd[xxxx]: Failed password for msfadmin from 192.168.127.128 port xxxxx ssh2
-sshd[xxxx]: Failed password for msfadmin from 192.168.127.128 port xxxxx ssh2
-sshd[xxxx]: Accepted password for msfadmin from 192.168.127.128 port xxxxx ssh2
+sshd[xxxx]: Failed password for msfadmin from 192.168.127.129 port xxxxx ssh2
+sshd[xxxx]: Failed password for msfadmin from 192.168.127.129 port xxxxx ssh2
+sshd[xxxx]: Accepted password for msfadmin from 192.168.127.129 port xxxxx ssh2
 ```
  
 ![Splunk — SSH brute force signature](screenshots/splunk-ssh-bruteforce.png)
@@ -129,7 +129,7 @@ sudo /etc/init.d/apache2 restart
 **Validation:** Re-ran the SQL injection payload after the fix and confirmed the event now appears in Splunk, tagged `apache2:`:
  
 ```
-Oct 13 19:19:31 metasploitable apache2: 192.168.127.128- - [13/Oct/2026:09:49:41 -0400] "GET /dvwa/vulnerabilities/sqli/?id=1%27+or+%271%27+%3D+%271&Submit=Submit HTTP/1.1" 200 3553
+Oct 13 19:19:31 metasploitable apache2: 192.168.127.129- - [13/Oct/2026:09:49:41 -0400] "GET /dvwa/vulnerabilities/sqli/?id=1%27+or+%271%27+%3D+%271&Submit=Submit HTTP/1.1" 200 3553
 ```
  
 ![Splunk confirming Apache logs now forwarding](screenshots/splunk-apache-fixed.png)
