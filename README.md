@@ -41,7 +41,7 @@ Full port/service enumeration against the target — 22 open services identified
 **Splunk result:** No corresponding events found.
 **Why:** Metasploitable2 has no firewall or IDS logging connection attempts at the network layer. Port scanning produces no syslog trace on an unmonitored host — this is expected behavior, not a misconfiguration.
 
-![Splunk search — no Nmap events found](screenshots/splunk-nmap-empty.png)
+
 
 ---
 
