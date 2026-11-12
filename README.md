@@ -167,7 +167,7 @@ Each of these requires a different kind of fix — new tooling (IDS/firewall log
 - Introduce a second attack technique (e.g. XSS, directory traversal) and repeat the visibility-gap analysis
 - Add a lightweight IDS (e.g. Suricata) to close the Nmap visibility gap
  
-*.*     @192.168.127.128
+
 ```
  
 ![syslog.conf forwarding rule](screenshots/syslog-conf.png)
