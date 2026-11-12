@@ -118,7 +118,7 @@ sudo /etc/init.d/apache2 restart
 **Validation:** Re-ran the SQL injection payload after the fix and confirmed the event now appears in Splunk, tagged `apache2:`:
 
 ```
-Oct 13 19:19:31 metasploitable apache2: 192.168.127.129 - - [13/Oct/2026:09:49:41 -0400] "GET /dvwa/vulnerabilities/sqli/?id=1%27+or+%271%27+%3D+%271&Submit=Submit HTTP/1.1" 200 3553
+Nov 12 17:07:22 metasploitable apache2: 192.168.127.129 - - [12/Nov/2026:06:34:37 -0500] "GET /dvwa/vulnerabilities/sqli/?id=1%27+OR+%271%27%3D%271&Submit=Submit HTTP/1.1" 200 4660
 ```
 
 ![Splunk confirming Apache logs now forwarding](screenshots/splunk-apache-fixed.png)
